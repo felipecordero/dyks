@@ -1,0 +1,59 @@
+---
+description: Apply DRY, YAGNI, KISS, and SOLID on every task
+alwaysApply: true
+---
+
+Apply these principles on every task — design, implementation, refactor, and review.
+
+## KISS — Keep It Simple, Stupid
+
+- Prefer the simplest solution that correctly solves the current problem.
+- Avoid cleverness: readable beats compact.
+- Do not add layers (helpers, wrappers, abstractions) until a concrete need appears.
+- If a change needs a long explanation, simplify the change first.
+
+## YAGNI — You Aren't Gonna Need It
+
+- Build only what the request requires now — not what might be needed later.
+- No speculative config, feature flags, extension points, or "just in case" parameters.
+- No premature generalization (generic frameworks, plugin systems, multi-tenant hooks) without an explicit requirement.
+- Defer optimization, caching, and scalability work until there is measured need.
+
+## DRY — Don't Repeat Yourself
+
+- Before writing new logic, search for existing functions, components, hooks, or utilities to reuse or extend.
+- Extract shared logic when the same behavior appears in 2+ places or is likely to diverge.
+- Do not copy-paste blocks — consolidate or call the existing implementation.
+- DRY applies to tests and docs too: reuse fixtures, factories, and patterns already in the codebase.
+- Balance DRY with YAGNI: do not abstract a one-off duplication that will not recur.
+
+## SOLID
+
+**S — Single Responsibility**
+- One reason to change per module, class, or function.
+- Split when a unit handles unrelated concerns (e.g., validation + persistence + formatting).
+
+**O — Open/Closed**
+- Extend behavior via composition, interfaces, or configuration — not by editing stable core logic for every variant.
+- Add new cases without rewriting existing ones when the domain clearly has variants.
+
+**L — Liskov Substitution**
+- Subtypes must honor the contract of their base type — no surprising overrides, narrowed inputs, or broken expectations.
+
+**I — Interface Segregation**
+- Prefer small, focused interfaces over fat ones that force unused methods.
+- Split types when callers only need a subset of behavior.
+
+**D — Dependency Inversion**
+- Depend on abstractions (interfaces, protocols, injected services), not concrete implementations.
+- Push I/O, frameworks, and external APIs to the edges; keep domain logic testable and framework-agnostic.
+
+## Before finishing
+
+Ask:
+
+1. Is this the smallest correct diff? (KISS + YAGNI)
+2. Did I reuse or extend existing code instead of duplicating? (DRY)
+3. Does each new unit have one clear job and stable boundaries? (SOLID)
+
+If any answer is no, simplify or refactor before presenting the result.
